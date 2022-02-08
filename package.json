@@ -26,8 +26,7 @@
   "main": "index.js",
   "type": "module",
   "scripts": {
-    "start": "npm run build && nodemon dist/index.js",
-    "build": "babel src --out-dir dist",
+    "start": "node index",
     "dev": "nodemon --exec babel-node index.js",
     "test": "mocha --timeout 10000000000"
   },
