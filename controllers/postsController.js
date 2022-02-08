@@ -2,7 +2,6 @@ import fs from 'fs';
 import path from 'path';
 import BlogPost from '../models/BlogModel.js';
 import  articleValidation  from '../middleware/BlogValidation.js';
-import commentSchema from '../middleware/CommentValidation.js';
 
 class BlogController {
 
@@ -88,9 +87,6 @@ class BlogController {
 
     static commentPost = async (req, res) => {
 
-        //Let's validate the inputs.
-        const {error} = commentSchema.validate(req.body);
-        if (error) return res.status(400).send(error.details[0].message);   
 
         try{
             
