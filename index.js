@@ -91,4 +91,4 @@ mongoose.connection.once('open', ()=> {
     console.log("Connected to MongoDB!")
     app.listen(PORT, () => console.log(`Server running on port ${PORT}`))
 })
-export default app.listen(5000);
+export default app.listen(5000); 
