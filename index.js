@@ -57,7 +57,7 @@ const options = {
   const specs = swaggerJsDoc(options);
 
 // enable CORS
-
+ 
 
 // middleware for cookies
 app.use(cookieParser())
