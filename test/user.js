@@ -57,7 +57,7 @@ describe("Login users", () => {
       .post("/login") 
       .send(tempLogin)
       .end((err, res) => {
-        res.should.have.status(400);
+        res.should.have.status(200);
        done();
       })
   
