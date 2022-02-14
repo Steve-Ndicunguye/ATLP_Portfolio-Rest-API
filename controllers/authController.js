@@ -8,7 +8,7 @@ const schema = joi.object({
         password: joi.string().min(5).required()
     });
 
-
+//test
 const handleLogin = async (req, res) => {
 
     const {error} = schema.validate(req.body);
