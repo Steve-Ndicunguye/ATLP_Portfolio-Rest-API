@@ -1,58 +1,84 @@
-import chai from 'chai';
-import chaiHttp from 'chai-http';
-import app from '../index';
+import chai from "chai";
+import chaiHttp from "chai-http";
+import mocha from "mocha";
+import request from "supertest";
+import app from "../index.js";
+const { it, describe, beforeEach, afterEach } = mocha;
 
-const should = chai.should();
-
-chai.use(chaiHttp);
 chai.should();
 
-  describe('POST /', function() {
-    it('It should login a user', function(done) {
-        this.timeout(500);
-        setTimeout(done, 300);
-        chai.request(app)
-        .post('/auth/login')
-        .send({ email: 'test@gmail.com', password: 'test123' })
-        .end((err, response) => {
-          response.should.have.status(200);
-          done();
-        });
-    });
-    it('Invalid user!', (done) => {
-      chai.request(app)
-      .post('/auth/login')
-      .send({ email: 'test@gmail.com', password: 123456789 })
-      .end((err, response) => {
-        response.should.have.status(404);
-        done();
-      });
+chai.use(chaiHttp);
+
+const userLogin2 = {
+  email:"andela@andela.com",
+  password:"Andelhfjhfj"
+};
+
+const tempLogin = {
+    email: "ndicunguyesteve@gmail.com",
+    password: "Diderot"
+}
+
+const userRegister = {
+    email:"janesmith123578@andela.com",
+    password:"Andelahfghfh",
+    firstname:"Jane",
+    lastname:"Smith"
+};
+
+describe("Register & login", () => {
+
+
+
+
+describe("Register users", () => {
+    it("It Should Register a user", (done) => {
+    request(app)
+      .post("/register")
+      .send(userRegister)
+      .end((err, res) => {
+        res.should.have.status(200);
+       done();
+      })
+  
   });
-    it('It should not login with Invalid email or password', (done) => {
-        chai.request(app)
-        .post('/auth/login')
-        .send({ email: 'test@gmail.com', password: 123456789 })
-        .end((err, response) => {
-          response.should.have.status(401);
-          done();
-        });
-    });
-    it('It should not login with null password', (done) => {
-        chai.request(app)
-        .post('/auth/login')
-        .send({ email: 'cyifuzos@gmail.com', password: null })
-        .end((err, response) => {
-          response.should.have.status(400);
-          done();
-        });
-    });
-    it('It should not login with null email', (done) => {
-        chai.request(app)
-        .post('/auth/login')
-        .send({ email: null, password: 'test1235' })
-        .end((err, response) => {
-          response.should.have.status(400);
-          done();
-        });
-    });
+  
   });
+  
+
+
+
+// login test
+
+
+describe("Login users", () => {
+    it("It Should login a user", (done) => {
+    request(app)
+      .post("/login") 
+      .send(tempLogin)
+      .end((err, res) => {
+        res.should.have.status(400);
+       done();
+      })
+  
+  });
+  
+  });
+
+ 
+describe("Don't Login users", () => {
+  it("It Should not login a user", (done) => {
+  request(app)
+    .post("/login") 
+    .send(userLogin2)
+    .end((err, res) => {
+      res.should.have.status(400);
+     done();
+    })
+
+});
+
+});
+
+  
+});
