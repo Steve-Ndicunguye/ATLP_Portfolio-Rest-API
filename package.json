@@ -7,7 +7,7 @@
   "scripts": {
     "start": "node index",
     "dev": "nodemon -r dotenv/config index.js",
-    "test": "nyc --reporter=text --reporter=lcov ./node_modules/.bin/mocha --timeout 100000 --exit --require @babel/register",
+    "test": "c8 --reporter=text --reporter=lcov ./node_modules/.bin/mocha --timeout 100000 --exit --require @babel/register",
     "test2": "c8 mocha --timeout 30000 -r dotenv/config test/ dotenv_config_path=test.env --exit"
   },
   "nyc": {
