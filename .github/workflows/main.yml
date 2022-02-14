@@ -27,7 +27,7 @@ jobs:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v2
       - run: npm install
-      - run: npm run test2
+      - run: npm run test
       - name: Code Climate Test Reporter
         uses: aktions/codeclimate-test-reporter@v1
         with:
