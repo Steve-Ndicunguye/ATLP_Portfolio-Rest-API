@@ -34,6 +34,10 @@ const options = {
         {
           url: "http://localhost:5000",
           description: "Development server" 
+        },
+        {
+          url: 'https://my-porfolio-rest-api.herokuapp.com/',
+          description: 'Remote server',
         }
       ],
       components: {
