@@ -14,8 +14,6 @@ const corsOptions = {
   optionsSuccessStatus: 200 
 }
 
-//const corsOptions = {origin: '*',optionsSuccessStatus: 200 }
-
 import swaggerUI from 'swagger-ui-express';
 import swaggerJsDoc from 'swagger-jsdoc';
 
