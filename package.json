@@ -6,8 +6,9 @@
   "type": "module",
   "scripts": {
     "start": "node index",
-    "dev": "nodemon --exec babel-node index.js",
-    "test": "mocha --timeout 10000000000"
+    "dev": "nodemon -r dotenv/config index.js",
+    "test": "mocha --timeout 10000000000",
+    "test2": "c8 mocha --timeout 30000 -r dotenv/config test/ dotenv_config_path=test.env --exit"
   },
   "keywords": [
     "example",
@@ -24,6 +25,7 @@
     "@hapi/joi": "^15.0.3",
     "bcrypt": "^5.0.1",
     "body-parser": "^1.19.1",
+    "c8": "^7.11.0",
     "chai": "^4.3.6",
     "chai-http": "^4.3.0",
     "cookie-parser": "^1.4.6",
@@ -38,6 +40,7 @@
     "multer": "^1.4.4",
     "node": "^17.4.0",
     "nodemon": "^2.0.15",
+    "supertest": "^6.2.2",
     "swagger-jsdoc": "^6.1.0",
     "swagger-ui-express": "^4.3.0"
   }
