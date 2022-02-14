@@ -8,7 +8,7 @@
     "start": "node index",
     "dev": "nodemon -r dotenv/config index.js",
     "test": "mocha --timeout 10000000000",
-    "test2": "c8 mocha --timeout 30000 -r dotenv/config test/ dotenv_config_path=test.env --exit"
+    "test2": "c8 mocha --timeout 30000 -r dotenv/config test/ dotenv_config_path=.env --exit"
   },
   "keywords": [
     "example",
