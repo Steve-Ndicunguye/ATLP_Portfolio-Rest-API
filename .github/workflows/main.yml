@@ -1,0 +1,39 @@
+name: CI
+env:
+  DB_CONNECT: mongodb+srv://ndicunguyesteve4:diderotsteve@cluster0.9vkqx.mongodb.net/steve_db?retryWrites=true&w=majority
+  ACCESS_TOKEN_SECRET: 1f87a60673b94f21ac7fd2abddd4ff7aee230f6578f16c2e6f0b9a44a2b6b99874eb2bb2d90fc95215f2d7c
+ea4eded7e3827bebc6189340ffd5d8e35d4ee5cac
+  CI: true
+
+# Controls when the workflow will run
+on:
+  # Triggers the workflow on push or pull request events but only for the master branch
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+# A workflow run is made up of one or more jobs that can run sequentially or in parallel
+jobs:
+  # This workflow contains a single job called "build"
+  build:
+    # The type of runner that the job will run on
+    runs-on: ubuntu-latest
+
+    # Steps represent a sequence of tasks that will be executed as part of the job
+    steps:
+      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+      - uses: actions/checkout@v2
+      - run: npm install
+      - run: npm run build
+      - run: npm run test
+      - name: Code Climate Test Reporter
+        uses: aktions/codeclimate-test-reporter@v1
+        with:
+          codeclimate-test-reporter-id: 4eee32245f23d60969ce848b43678c2860b669f78d6d7d0bf8c45ec3ac76596d
+          command: after-build
+    
+    
