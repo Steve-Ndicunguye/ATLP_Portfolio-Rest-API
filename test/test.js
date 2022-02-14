@@ -1,10 +1,6 @@
-// import chai from "chai";
-// import chaiHttp from "chai-http";
-// import server from "../index.js";
-
-import chai from "chai";
+import chai, { expect } from "chai";
 import chaiHttp from "chai-http";
-import server from "../src/index.js";
+import server from "../index.js";
 import request from "supertest";
 
 //Assertion style
@@ -13,25 +9,25 @@ chai.should();
 chai.use(chaiHttp);
 
 const tempPost = {
-  Title : "Messy Post",
-  Body : "cjhkcfgbjhcfgwebhfebn?",
-  ImageLink : "https://youtu.be/f3wOS11SP9I"
+  title : "Messy Post",
+  body : "cjhkcfgbjhcfgwebhfebn?",
+  imgLink : "https://youtu.be/f3wOS11SP9I"
 };
 
 const updatePost = {
-  Title : "New Post title",
-  Body : "cjhkcfgbjhcfgwebhfebn?",
-  ImageLink : "https://youtu.be/f3wOS11SP9I"
+  title : "New Post title",
+  body : "cjhkcfgbjhcfgwebhfebn?",
+  imgLink : "https://youtu.be/f3wOS11SP9I"
 };
 
-describe("Blog CRUD", () => {
+describe("My posts", () => {
   //get all posts
 
-  describe("GET /api/Getblog", () => {
-    it("It Should GET all Posts", (done) => {
+  describe("Get all posts", () => {
+    it("It Should get all Posts", (done) => {
       chai
         .request(server)
-        .get("/api/Getblog")
+        .get("/posts/getAllPosts")
         .end((err, res) => {
           res.should.have.status(200);
           res.body.should.be.a("object");
@@ -43,59 +39,50 @@ describe("Blog CRUD", () => {
 
   //get post by id
 
-  describe("GET /api/Getblog/:id", () => {
-    it("It Should GET a Post by ID", (done) => {
-      const _id = "61f6bd7b0713577b87e01a13";
-      chai
-        .request(server)
-        .get("/api/Getblog/" + _id)
-        .end((err, res) => {
-          res.should.have.status(200);
-          res.body.should.have.property("_id");
-          res.body.should.be.a("object");
-          res.body.should.have.property("title");
-          res.body.should.have.property("body");
-          res.body.should.have.property("imgLink");
-          res.body.should.have.property("_id").equals(_id);
-          done();
-        })
-        .timeout(10000);
-    });
-  });
+  // describe("Get a post by Id", () => {
+  //   it("It Should GET a Post by ID", (done) => {
+  //     const _id = "6202b2ef194ad87db1e67afa";
+  //     chai
+  //       .request(server)
+  //       .get("/posts/getSinglePost/" + _id)
+  //       .end((err, res) => {
+  //         res.should.have.status(200);
+  //         res.body.should.be.a("object");
+  //         done();
+        
+  //   });
+  // });
 
   //post route
 
-  describe("POST Blog", () => {
-    let tempToken = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MWYzYTQ0MThkNDQwYzhlODE2ZDQwOWQiLCJyb2xlIjoiYWRtaW4iLCJpYXQiOjE2NDMzODAzNjZ9.Ku9uyjYv-aYUB7Xka4ezHWWnPsy_y9z0hT7t3CqcHMI"
-  it("should post blog with valid credentials", (done) => {
+  describe("Create a post", () => {
+    let tempToken = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjIwMjhlZGM1NDI5ZDA3ZTBiNzIzNmFkIiwicm9sZSI6ImFkbWluIn0sImlhdCI6MTY0NDg3MjM1MiwiZXhwIjoxNjQ0ODc1OTUyfQ._DNe4eDlHcVex1mYV_aXyX9wAqGVP6d9GH37KZAoM0k"
+  it("It should create a post ", (done) => {
     request(server)
-      .post("/api/Postblog")
+      .post("/posts/createPost")
       .set({
-          'admin-token': tempToken,
+          'token': tempToken,
       })  
       .send(tempPost)
       .expect(200)
       
        done();
-      // .then((res) => {
-      //   expect(res.body.email).to.be.eql(tempUser.Email);
-      //   done();
-      // })
-      // .catch((err) => done(err));
+      })
+      .timeout(10000);
   });
 
 });
 
   //delete route
 
-  describe("DELETE /api/Deleteblog/:id", () => {
-    let tempToken = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MWYzYTQ0MThkNDQwYzhlODE2ZDQwOWQiLCJyb2xlIjoiYWRtaW4iLCJpYXQiOjE2NDMzODAzNjZ9.Ku9uyjYv-aYUB7Xka4ezHWWnPsy_y9z0hT7t3CqcHMI"
-    it("It Should DELETE a Post by ID", (done) => {
-      const _id = "61f6bd7b0713577b87e01a13";
+  describe("Delete posts", () => {
+    let tempToken = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjIwMjhlZGM1NDI5ZDA3ZTBiNzIzNmFkIiwicm9sZSI6ImFkbWluIn0sImlhdCI6MTY0NDg3MjM1MiwiZXhwIjoxNjQ0ODc1OTUyfQ._DNe4eDlHcVex1mYV_aXyX9wAqGVP6d9GH37KZAoM0k"
+    it("It Should delete a Post by ID", (done) => {
+      const _id = "6202b2ef194ad87db1e67afa";
       request(server)
-        .delete("/api/Getblog/" + _id)
+        .delete("/posts/deletePost/" + _id)
         .set({
-          'admin-token': tempToken,
+          'token': tempToken,
         })
         .expect(200)  
 
@@ -108,14 +95,14 @@ describe("Blog CRUD", () => {
 
   //patch route
 
-  describe("PATCH /api/Updateblog/:id", () => {
-    let tempToken = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MWYzYTQ0MThkNDQwYzhlODE2ZDQwOWQiLCJyb2xlIjoiYWRtaW4iLCJpYXQiOjE2NDMzODAzNjZ9.Ku9uyjYv-aYUB7Xka4ezHWWnPsy_y9z0hT7t3CqcHMI"
-    it("It Should PATCH a Post by ID", (done) => {
-      const _id = "61f6bd7b0713577b87e01a13";
+  describe("Update posts", () => {
+    let tempToken = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjIwMjhlZGM1NDI5ZDA3ZTBiNzIzNmFkIiwicm9sZSI6ImFkbWluIn0sImlhdCI6MTY0NDg3MjM1MiwiZXhwIjoxNjQ0ODc1OTUyfQ._DNe4eDlHcVex1mYV_aXyX9wAqGVP6d9GH37KZAoM0k"
+    it("It Should update a post", (done) => {
+      const _id = "6202b2ef194ad87db1e67afa";
       request(server)
-        .patch("/api/Updateblog/" + _id)
+        .patch("/posts/updatePost/" + _id)
         .set({
-          'admin-token': tempToken,
+          'token': tempToken,
         })
         .send(updatePost)
         .expect(200)  
@@ -126,6 +113,3 @@ describe("Blog CRUD", () => {
         .timeout(10000);
     
   });
-
-
-});
