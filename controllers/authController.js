@@ -1,7 +1,8 @@
 import User from '../models/User.js'; 
 import jwt from 'jsonwebtoken';
 import bcrypt from 'bcrypt';
-import joi from '@hapi/joi';
+import joi from '@hapi/joi'
+import role from 
 
 const schema = joi.object({
         email: joi.string().required().email(),
@@ -28,7 +29,7 @@ const handleLogin = async (req, res) => {
     const token = jwt.sign({ user : {id: user.id, role: user.role}}, process.env.ACCESS_TOKEN_SECRET, {expiresIn:3600});
     res.header('auth-token', token);
 
-    res.status(200).json({success: 'Logged In Successfully :'});
+    res.status(200).json({success: 'Logged In Successfully ', 'token': token });
 }
 
 
