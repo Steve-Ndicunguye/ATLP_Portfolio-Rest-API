@@ -4,12 +4,8 @@ import bcrypt from 'bcrypt';
 import joi from '@hapi/joi';
 
 const schema = joi.object({
-        email: joi.string().required().email().message({"string.pattern.base":"Invalid email",
-                "string.required":"Email is required", "string.empty":"Email field can not be empty",
-                "string.email":"Invalid email"}),
-        password: joi.string().min(5).required().message({"string.pattern.base":"Invalid password",
-                "string.required":"Password is required", "string.empty":"Password field can not be empty",
-                "string.min":"Password length can not be less than 5 characters"})
+        email: joi.string().required().email(),
+        password: joi.string().min(5).required()
     });
 
 //test
