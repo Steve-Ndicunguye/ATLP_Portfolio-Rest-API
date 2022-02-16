@@ -29,7 +29,7 @@ const handleLogin = async (req, res) => {
     const token = jwt.sign({ user : {id: user.id, role: user.role}}, process.env.ACCESS_TOKEN_SECRET, {expiresIn:3600});
     res.header('auth-token', token);
 
-    res.status(200).json({success: 'Logged In Successfully ', 'token': token });
+    res.status(200).json({success: 'Logged In Successfully ', 'token': token , 'role': user.role});
 }
 
 
