@@ -17,11 +17,11 @@ const handleLogin = async (req, res) => {
     
     //check if a email is in the database
     const user = await User.findOne({email: req.body.email});
-    if(!user) return res.status(400).send('Invalid Email Plz Try Again!');
+    if(!user) return res.status(400).send({error:'Invalid Email Plz Try Again!'});
 
     //check if the password is correct.
     const validPass = await bcrypt.compare(req.body.password, user.password);
-    if(!validPass) return res.status(400).send('Invalid Password Plz Try Again!');
+    if(!validPass) return res.status(400).send({error:'Invalid Password Plz Try Again!'});
 
 
     //create and Assign a token
