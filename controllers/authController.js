@@ -5,7 +5,7 @@ import joi from '@hapi/joi';
 
 const schema = joi.object({
         email: joi.string().email(),
-        password: joi.string().min(5).required()
+        password: joi.string().min(5)
     });
 
 //test
