@@ -15,8 +15,8 @@ const schema = joi.object({
 //test
 const handleLogin = async (req, res) => {
 
-    const {ValidationError} = schema.validate(req.body);
-    if (ValidationError) return res.send(ValidationError.error);
+    const {error} = schema.validate(req.body);
+    if(error) return res.status(400).send(error.details[0].message)
       
     
     //check if a email is in the database
