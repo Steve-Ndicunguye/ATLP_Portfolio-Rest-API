@@ -4,7 +4,7 @@ import bcrypt from 'bcrypt';
 import joi from '@hapi/joi';
 
 const schema = joi.object({
-        email: joi.string().required().email(),
+        email: joi.string().email(),
         password: joi.string().min(5).required()
     });
 
