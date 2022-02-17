@@ -19,7 +19,7 @@ class privateRoute {
     
     static authAdmin = (req, res, next) => {
         const token = req.header('auth-token');
-        if(!token) return res.status(401).send('Access Denied You Do not have permission to access this Page');
+        if(!token) return res.status(401).send({error:'Access Denied You Do not have permission to access this Page'});
     
         try {
     
@@ -27,7 +27,7 @@ class privateRoute {
             req.user = verified.user;
 
             if(req.user.role == 'user'){
-                res.status(401).send('Access Denied You Are not Authorized ');
+                res.status(401).send({error:'Access Denied You Are not Authorized '});
             }
     
             next();
