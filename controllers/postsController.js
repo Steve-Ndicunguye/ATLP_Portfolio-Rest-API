@@ -8,7 +8,7 @@ class BlogController {
     static post = async (req, res)=>{
         //Let's validate the inputs.
         const {error} = articleValidation(req.body);
-        if (error) return res.status(400).send(error.details[0].message);   
+        if (error) return res.status(400).send({error: error.details[0].message});   
 
         const blog = new BlogPost({
             title: req.body.title,
@@ -29,7 +29,7 @@ class BlogController {
 
         //Let's validate the inputs.
         const {error} = articleValidation(req.body);
-        if (error) return res.status(400).send(error.details[0].message);   
+        if (error) return res.status(400).send({error: error.details[0].message});   
 
         const blog = new BlogPost({
             title: req.body.title,
